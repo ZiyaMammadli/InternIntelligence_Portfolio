@@ -3,7 +3,7 @@ using Portfolio.Domain.Entities.Common;
 
 namespace Portfolio.Domain.Entitiesl;
 
-public class Achievement : IBaseEntity
+public class Achievement : BaseEntity
 {
     public Guid UserId { get; set; }
     public string Name { get; set; }

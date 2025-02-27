@@ -2,7 +2,7 @@
 
 namespace Portfolio.Domain.Entities;
 
-public class Skill : IBaseEntity
+public class Skill : BaseEntity
 {
     public Guid UserId { get; set; }
     public string Name { get; set; }

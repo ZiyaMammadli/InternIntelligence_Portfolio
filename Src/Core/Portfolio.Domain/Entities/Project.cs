@@ -2,7 +2,7 @@
 
 namespace Portfolio.Domain.Entities;
 
-public class Project : IBaseEntity
+public class Project : BaseEntity
 {
     public Guid UserId { get; set; }
     public string Name { get; set; }

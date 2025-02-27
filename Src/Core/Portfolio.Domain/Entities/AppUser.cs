@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
+using Portfolio.Domain.Entitiesl;
 
 namespace Portfolio.Domain.Entities;
 
@@ -12,4 +13,5 @@ public class AppUser:IdentityUser<Guid>
     public DateTime RefreshTokenExpiredDate { get; set; }
     public List<Project> Projects { get; set; }
     public List<Skill> Skills { get; set; }
+    public List<Achievement> Achievements { get; set; }
 }

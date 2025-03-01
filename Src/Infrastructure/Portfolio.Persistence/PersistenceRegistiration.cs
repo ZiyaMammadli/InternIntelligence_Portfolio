@@ -1,8 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Portfolio.Application.Interfaces.Repositories;
+using Portfolio.Application.Interfaces.UnitOfWorks;
 using Portfolio.Domain.Entities;
 using Portfolio.Persistence.Contexts;
+using Portfolio.Persistence.Repositories;
+using Portfolio.Persistence.UnitOfWorks;
 
 namespace Portfolio.Persistence;
 
@@ -26,5 +30,9 @@ public static class PersistenceRegistiration
         })
         .AddRoles<Role>()
         .AddEntityFrameworkStores<PortfolioDbContext>();
+
+        services.AddScoped<IUnitOfWork,UnitOfWork>();
+        services.AddScoped(typeof(IReadRepository<>),typeof(ReadRepository<>));
+        services.AddScoped(typeof(IWriteRepository<>),typeof(WriteRepository<>));
     }
 }

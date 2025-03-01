@@ -1,27 +1,37 @@
-﻿using Portfolio.Application.Interfaces.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Portfolio.Application.Interfaces.Repositories;
 using Portfolio.Domain.Entities.Common;
+using Portfolio.Persistence.Contexts;
 
 namespace Portfolio.Persistence.Repositories;
 
 public class WriteRepository<TEntity> : IWriteRepository<TEntity> where TEntity : class, IBaseEntity, new()
 {
-    public Task AddAsync(TEntity entity)
+    private readonly PortfolioDbContext _DbContext;
+    private DbSet<TEntity> DbTable { get => _DbContext.Set<TEntity>(); }
+
+    public WriteRepository(PortfolioDbContext dbContext)
     {
-        throw new NotImplementedException();
+        _DbContext = dbContext;
+    }
+    public async Task AddAsync(TEntity entity)
+    {
+        await DbTable.AddAsync(entity);
     }
 
-    public Task AddRangeAsync(List<TEntity> entities)
+    public async Task AddRangeAsync(List<TEntity> entities)
     {
-        throw new NotImplementedException();
+        await DbTable.AddRangeAsync(entities);
     }
 
-    public void Delete(TEntity entity)
+    public async void Delete(TEntity entity)
     {
-        throw new NotImplementedException();
+        await Task.Run(() => DbTable.Remove(entity));
     }
 
-    public Task<TEntity> UpdateAsync(TEntity entity)
+    public async Task<TEntity> UpdateAsync(TEntity entity)
     {
-        throw new NotImplementedException();
+        await Task.Run(() => DbTable.Update(entity));
+        return entity;
     }
 }

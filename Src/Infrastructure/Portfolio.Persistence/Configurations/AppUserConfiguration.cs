@@ -24,5 +24,9 @@ public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
             .HasMany(u=>u.Achievements)
             .WithOne(a=>a.User)
             .HasForeignKey(a=>a.UserId);
+        builder
+            .HasMany(u=>u.ContactForms)
+            .WithOne(cf=>cf.User)
+            .HasForeignKey(cf=>cf.UserId);
     }
 }

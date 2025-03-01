@@ -14,4 +14,5 @@ public class AppUser:IdentityUser<Guid>
     public List<Project> Projects { get; set; }
     public List<Skill> Skills { get; set; }
     public List<Achievement> Achievements { get; set; }
+    public List<ContactForm> ContactForms { get; set; }
 }

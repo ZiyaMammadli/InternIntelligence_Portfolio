@@ -1,5 +1,7 @@
 using Portfolio.Infrastructure;
 using Portfolio.Persistence;
+using Portfolio.Application;
+using Portfolio.Application.ExceptionMiddleWares;
 var builder = WebApplication.CreateBuilder(args);
 
 var env=builder.Environment;
@@ -15,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,6 +26,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseExceptionMiddleWare();
 
 app.UseHttpsRedirection();
 

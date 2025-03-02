@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Tokens;
+using Portfolio.Application.Exceptions.Base;
+using System.Net;
+using System.Text.Json;
 
 namespace Portfolio.Application.ExceptionMiddleWares;
 
@@ -10,10 +14,39 @@ public class ExceptionHandlerMiddleWare : IMiddleware
 		{
 			await next(context);
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-
-			throw;
+			context.Response.ContentType = "application/json";
+			ExceptionModel exceptionModel = new ExceptionModel();
+			switch(ex)
+			{
+				case BaseException baseException:
+					context.Response.StatusCode =baseException.StatusCode;
+                    exceptionModel = new()
+					{
+						Message = ex.Message,
+						StatusCode=context.Response.StatusCode
+					};
+					break;
+                case SecurityTokenException securityTokenException:
+                    context.Response.StatusCode = StatusCodes.Status404NotFound;
+                    exceptionModel = new()
+                    {
+                        Message = ex.Message,
+                        StatusCode = context.Response.StatusCode,
+                    };
+                    break;
+                default:
+					context.Response.StatusCode=(int)HttpStatusCode.InternalServerError;
+					 exceptionModel = new()
+					{
+						Message = ex.Message,//"An unexpected error occurred."
+						StatusCode = context.Response.StatusCode
+					};
+					break;
+			}
+			string json =JsonSerializer.Serialize(exceptionModel);
+			await context.Response.WriteAsync(json);
 		}
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Portfolio.Application.Features.Auth.Commands.Login;
 
-public class LoginCommandValidation:AbstractValidator<LoginCommandRequest>
+public class LoginCommandValidator:AbstractValidator<LoginCommandRequest>
 {
-    public LoginCommandValidation()
+    public LoginCommandValidator()
     {
         RuleFor(l => l.Email)
             .EmailAddress().WithMessage("This are must be email")

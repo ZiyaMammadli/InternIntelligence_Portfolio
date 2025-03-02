@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using Portfolio.Application.Exceptions.Base;
 using System.Net;
@@ -28,6 +29,15 @@ public class ExceptionHandlerMiddleWare : IMiddleware
 						StatusCode=context.Response.StatusCode
 					};
 					break;
+                case ValidationException validationException:
+                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    exceptionModel = new()
+                    {
+                        Message = "Validation is failed",
+                        StatusCode = context.Response.StatusCode,
+						Errors=validationException.Errors.Select(e=>new {e.PropertyName,e.ErrorMessage}).ToList()
+                    };
+                    break;
                 case SecurityTokenException securityTokenException:
                     context.Response.StatusCode = StatusCodes.Status404NotFound;
                     exceptionModel = new()

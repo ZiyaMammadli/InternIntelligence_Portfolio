@@ -6,7 +6,7 @@ namespace Portfolio.Application.Interfaces.Tokens;
 
 public interface ITokenService
 {
-    public Task<JwtSecurityToken> GenerateAccessTokenAsync(AppUser appUser);
+    public Task<JwtSecurityToken> GenerateAccessTokenAsync(AppUser user);
     public string GenerateRefreshToken();
     public ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token);
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Features.Auth.Commands.Login;
+using Portfolio.Application.Features.Auth.Commands.RefreshToken;
 using Portfolio.Application.Features.Auth.Commands.Register;
 using Portfolio.Application.Features.Auth.Commands.Revoke;
 
@@ -35,6 +36,13 @@ namespace Portfolio.Api.Controllers
         {
             await _mediator.Send(request);
             return Ok();
+        }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> RefreshToken(RefreshTokenCommandRequest request)
+        {
+            var response=await _mediator.Send(request);
+            return Ok(response);
         }
     }
 }

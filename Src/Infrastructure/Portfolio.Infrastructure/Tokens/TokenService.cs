@@ -65,7 +65,7 @@ public class TokenService : ITokenService
         JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
         var principal = handler.ValidateToken(token,validationParameters,out SecurityToken securityToken);
         if(securityToken is not JwtSecurityToken jwtSecurityToken 
-            || !!jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+            || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
         {
             throw new SecurityTokenException("Token is not found");
         }

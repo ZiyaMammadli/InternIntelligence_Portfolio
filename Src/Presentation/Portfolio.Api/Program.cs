@@ -23,7 +23,7 @@ builder.Services.AddApplication();
 //Swagger security settings
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "InternIntelligence_UserLoginFunctionality", Version = "v1", Description = "InternIntelligence_UserLoginFunctionality swagger client." });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "InternIntelligence_Portfolio", Version = "v1", Description = "InternIntelligence_Portfolio swagger client." });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
         Name = "Authorization",

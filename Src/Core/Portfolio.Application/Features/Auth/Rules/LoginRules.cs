@@ -6,9 +6,9 @@ namespace Portfolio.Application.Features.Auth.Rules;
 
 public class LoginRules:BaseRule
 {
-    public Task EnsureUserExistAsync(AppUser user)
+    public Task EnsureEmailCheckAsync(AppUser user)
     {
-        if (user is null) throw new UserNotFoundException(404,"User is not found");
+        if (user is null) throw new UserNotFoundException(404, "Email or Password is incorrect");
         return Task.CompletedTask;
     }
     public Task EnsurePasswordCheckAsync(bool checkPassword)

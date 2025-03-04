@@ -11,8 +11,8 @@ public class AppUser:IdentityUser<Guid>
     public string RefreshToken { get; set; }
     public bool IsDeleted { get; set; }
     public DateTime RefreshTokenExpiredDate { get; set; }
-    public List<Project> Projects { get; set; }
-    public List<Skill> Skills { get; set; }
-    public List<Achievement> Achievements { get; set; }
-    public List<ContactForm> ContactForms { get; set; }
+    public List<Project>? Projects { get; set; }
+    public List<Skill>? Skills { get; set; }
+    public List<Achievement>? Achievements { get; set; }
+    public List<ContactForm>? ContactForms { get; set; }
 }

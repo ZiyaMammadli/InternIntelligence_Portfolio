@@ -15,24 +15,28 @@ namespace Portfolio.Application.Features.Auth.Commands.Login
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
 
-        public LoginCommandHandler(UserManager<AppUser> userManager,LoginRules loginRules,ITokenService tokenService,IConfiguration configuration)
+        public LoginCommandHandler(UserManager<AppUser> userManager,
+            LoginRules loginRules,
+            ITokenService tokenService,
+            IConfiguration configuration)
         {
-            _userManager = userManager;            
+            _userManager = userManager;
             _loginRules = loginRules;
             _tokenService = tokenService;
             _configuration = configuration;
         }
+
         public async Task<LoginCommandResponse> Handle(LoginCommandRequest request, CancellationToken cancellationToken)
         {
-            AppUser? user=await _userManager.FindByEmailAsync(request.Email);
-            await _loginRules.EnsureUserExistAsync(user);
-            bool checkPassword=await _userManager.CheckPasswordAsync(user,request.Password);
+            AppUser? user = await _userManager.FindByEmailAsync(request.Email);
+            await _loginRules.EnsureEmailCheckAsync(user);
+            bool checkPassword = await _userManager.CheckPasswordAsync(user, request.Password);
             await _loginRules.EnsurePasswordCheckAsync(checkPassword);
-            string refreshToken=_tokenService.GenerateRefreshToken();
-            JwtSecurityToken token= await _tokenService.GenerateAccessTokenAsync(user);
-            string accessToken=new JwtSecurityTokenHandler().WriteToken(token);
+            string refreshToken = _tokenService.GenerateRefreshToken();
+            JwtSecurityToken token = await _tokenService.GenerateAccessTokenAsync(user);
+            string accessToken = new JwtSecurityTokenHandler().WriteToken(token);
             user.RefreshToken = refreshToken;
-            _=int.TryParse(_configuration["JWT:RefreshTokenValidityInDays"], out int RefreshTokenValidityInDays);
+            _ = int.TryParse(_configuration["JWT:RefreshTokenValidityInDays"], out int RefreshTokenValidityInDays);
             user.RefreshTokenExpiredDate = DateTime.UtcNow.AddDays(RefreshTokenValidityInDays);
             await _userManager.UpdateAsync(user);
             await _userManager.UpdateSecurityStampAsync(user);
@@ -43,6 +47,7 @@ namespace Portfolio.Application.Features.Auth.Commands.Login
                 Expiration = token.ValidTo
             };
             return response;
+
         }
     }
 }

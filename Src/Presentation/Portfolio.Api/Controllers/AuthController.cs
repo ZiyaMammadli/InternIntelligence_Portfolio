@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Features.Auth.Commands.Login;
 using Portfolio.Application.Features.Auth.Commands.Register;
+using Portfolio.Application.Features.Auth.Commands.Revoke;
 
 namespace Portfolio.Api.Controllers
 {
@@ -22,11 +23,17 @@ namespace Portfolio.Api.Controllers
             var response=await _mediator.Send(request);
             return Ok(response);
         }
+        [HttpPost]        
+        public async Task<IActionResult> Register(RegisterCommandRequest request)
+        {
+            await _mediator.Send(request);
+            return Ok();
+        }
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Register(RegisterCommandRequest register)
+        public async Task<IActionResult> Revoke(RevokeCommandRequest request)
         {
-            await _mediator.Send(register);
+            await _mediator.Send(request);
             return Ok();
         }
     }

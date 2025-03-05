@@ -2,7 +2,7 @@
 
 namespace Portfolio.Application.Features.Projects.Commands.Update;
 
-public class DeleteProjectCommandRequest:IRequest<Unit>
+public class UpdateProjectCommandRequest:IRequest<Unit>
 {
     public int Id { get; set; } 
     public string Name { get; set; }

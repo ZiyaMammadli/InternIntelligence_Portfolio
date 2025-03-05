@@ -2,7 +2,7 @@
 
 namespace Portfolio.Application.Features.Projects.Commands.Update;
 
-public class UpdateProjectCommandValidator:AbstractValidator<DeleteProjectCommandRequest>
+public class UpdateProjectCommandValidator:AbstractValidator<UpdateProjectCommandRequest>
 {
     public UpdateProjectCommandValidator()
     {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Features.Projects.Commands.Create;
+using Portfolio.Application.Features.Projects.Commands.Delete;
 using Portfolio.Application.Features.Projects.Commands.Update;
 
 namespace Portfolio.Api.Controllers
@@ -23,13 +24,13 @@ namespace Portfolio.Api.Controllers
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> Update(DeleteProjectCommandRequest request)
+        public async Task<IActionResult> Update(UpdateProjectCommandRequest request)
         {
             await _mediator.Send(request);
             return Ok();
         }
         [HttpDelete]
-        public async Task<IActionResult> Delete(DeleteProjectCommandRequest request)
+        public async Task<IActionResult> Delete(DeleteProductCommandRequest request)
         {
             await _mediator.Send(request);
             return Ok();

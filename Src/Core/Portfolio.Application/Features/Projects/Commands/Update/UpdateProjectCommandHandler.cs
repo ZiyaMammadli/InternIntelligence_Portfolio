@@ -5,7 +5,7 @@ using Portfolio.Domain.Entities;
 
 namespace Portfolio.Application.Features.Projects.Commands.Update;
 
-public class UpdateProjectCommandHandler : IRequestHandler<DeleteProjectCommandRequest, Unit>
+public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommandRequest, Unit>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly UpdateRules _updateRules;
@@ -15,7 +15,7 @@ public class UpdateProjectCommandHandler : IRequestHandler<DeleteProjectCommandR
         _unitOfWork = unitOfWork;
         _updateRules = updateRules;
     }
-    public async Task<Unit> Handle(DeleteProjectCommandRequest request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateProjectCommandRequest request, CancellationToken cancellationToken)
     {
         Project project=await _unitOfWork.GetReadRepository<Project>().GetSingleAsync(p=>p.Id==request.Id);
         await _updateRules.EnsureProjectFoundAsync(project);

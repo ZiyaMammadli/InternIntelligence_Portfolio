@@ -21,7 +21,8 @@ public class UpdateRules:BaseRule
     }
     public async Task EnsureProjectNameCheckAsync(string name)
     {
-        if (await _unitOfWork.GetReadRepository<Project>().GetSingleAsync(p=>p.Name==name) is not null)
+        var project = await _unitOfWork.GetReadRepository<Project>().GetSingleAsync(p => p.Name == name);
+        if (project is not null && project.Name != name)
             throw new ProjectAlreadyExistException(400, "ProjectName is already exist");
     }
 } 

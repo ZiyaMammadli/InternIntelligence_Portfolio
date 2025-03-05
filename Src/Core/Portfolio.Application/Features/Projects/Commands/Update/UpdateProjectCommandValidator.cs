@@ -6,16 +6,16 @@ public class UpdateProjectCommandValidator:AbstractValidator<UpdateProjectComman
 {
     public UpdateProjectCommandValidator()
     {
-        RuleFor(u => u.Id)
+        RuleFor(p => p.Id)
             .NotEmpty().WithMessage("Id can not be Empty")
             .NotNull().WithMessage("Id can not be null");
-        RuleFor(u => u.Name)
+        RuleFor(p => p.Name)
             .NotEmpty().WithMessage("Name can not be Empty")
             .NotNull().WithMessage("Name can not be null");
-        RuleFor(u => u.Description)
+        RuleFor(p => p.Description)
             .NotEmpty().WithMessage("Description can not be Empty")
             .NotNull().WithMessage("Description can not be null");
-        RuleFor(u => u.Link)
+        RuleFor(p => p.Link)
             .NotEmpty().WithMessage("Link can not be Empty")
             .NotNull().WithMessage("Link can not be null");
     }

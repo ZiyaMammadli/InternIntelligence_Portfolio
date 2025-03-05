@@ -1,29 +1,28 @@
 ﻿using Portfolio.Application.Bases;
 using Portfolio.Application.Exceptions.Achievement;
-using Portfolio.Application.Exceptions.Auth;
-using Portfolio.Application.Exceptions.Project;
 using Portfolio.Application.Interfaces.UnitOfWorks;
-using Portfolio.Domain.Entities;
 using Portfolio.Domain.Entitiesl;
 
 namespace Portfolio.Application.Features.Achievements.Rules;
 
-public class CreateRules:BaseRule
+public class UpdateRules:BaseRule
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateRules(IUnitOfWork unitOfWork)
+    public UpdateRules(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
-    public Task EnsureUserIdCheckAsync(AppUser user)
+    public Task EnsureAchievementFoundAsync(Achievement achievement)
     {
-        if (user is null) throw new UserNotFoundException(404, "UserId is invalid");
+        if (achievement is null)
+            throw new AchievementNotFoundException(404, "Achievement is not found");
         return Task.CompletedTask;
     }
     public async Task EnsureAchievementNameCheckAsync(string name)
     {
-        if (await _unitOfWork.GetReadRepository<Achievement>().GetSingleAsync(p => p.Name == name) is not null)
+        var achievement = await _unitOfWork.GetReadRepository<Achievement>().GetSingleAsync(a => a.Name == name);
+        if (achievement is not null && achievement.Name != name)
             throw new AchievementAlreadyExistException(400, "AchievementName is already exist");
     }
 }

@@ -1,14 +1,14 @@
 ﻿using FluentValidation;
 
-namespace Portfolio.Application.Features.Achievements.Commands.Create;
+namespace Portfolio.Application.Features.Achievements.Commands.Update;
 
-public class CreateAchievementCommandValidator:AbstractValidator<CreateAchievementCommandRequest>
+public class UpdateAchievementCommandValidator:AbstractValidator<UpdateAchievementCommandRequest>
 {
-    public CreateAchievementCommandValidator()
+    public UpdateAchievementCommandValidator()
     {
-        RuleFor(a => a.UserId)
-           .NotEmpty().WithMessage("UserId can not be Empty")
-           .NotNull().WithMessage("UserId can not be null");
+        RuleFor(a => a.Id)
+           .NotEmpty().WithMessage("Id can not be Empty")
+           .NotNull().WithMessage("Id can not be null");
         RuleFor(a => a.Name)
             .NotEmpty().WithMessage("Name can not be Empty")
             .NotNull().WithMessage("Name can not be null");

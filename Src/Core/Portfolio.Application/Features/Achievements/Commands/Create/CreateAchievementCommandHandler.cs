@@ -23,7 +23,7 @@ namespace Portfolio.Application.Features.Achievements.Commands.Create
         {
             AppUser? user = await _userManager.FindByIdAsync(request.UserId.ToString());
             await _createRules.EnsureUserIdCheckAsync(user);
-            await _createRules.EnsureProjectNameCheckAsync(request.Name);
+            await _createRules.EnsureAchievementNameCheckAsync(request.Name);
             Achievement achievement = new()
             {
                 UserId = user.Id,

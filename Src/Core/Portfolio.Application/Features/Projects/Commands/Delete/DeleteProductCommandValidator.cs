@@ -6,7 +6,7 @@ public class DeleteProductCommandValidator:AbstractValidator<DeleteProductComman
 {
     public DeleteProductCommandValidator()
     {
-        RuleFor(u => u.Id)
+        RuleFor(p => p.Id)
            .NotEmpty().WithMessage("Id can not be Empty")
            .NotNull().WithMessage("Id can not be null");
     }

@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Features.Achievements.Commands.Create;
+using Portfolio.Application.Features.Achievements.Commands.Update;
 
 namespace Portfolio.Api.Controllers
 {
@@ -17,6 +17,12 @@ namespace Portfolio.Api.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> Create(CreateAchievementCommandRequest request)
+        {
+            await mediator.Send(request);
+            return Ok();
+        }
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateAchievementCommandRequest request)
         {
             await mediator.Send(request);
             return Ok();

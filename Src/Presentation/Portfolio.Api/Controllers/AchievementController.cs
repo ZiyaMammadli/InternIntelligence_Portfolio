@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Features.Achievements.Commands.Create;
+using Portfolio.Application.Features.Achievements.Commands.Delete;
 using Portfolio.Application.Features.Achievements.Commands.Update;
 
 namespace Portfolio.Api.Controllers
@@ -23,6 +24,12 @@ namespace Portfolio.Api.Controllers
         }
         [HttpPut]
         public async Task<IActionResult> Update(UpdateAchievementCommandRequest request)
+        {
+            await mediator.Send(request);
+            return Ok();
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(DeleteAchievementCommandRequest request)
         {
             await mediator.Send(request);
             return Ok();

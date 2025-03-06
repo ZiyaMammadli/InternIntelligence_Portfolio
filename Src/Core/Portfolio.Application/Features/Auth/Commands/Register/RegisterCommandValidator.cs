@@ -8,10 +8,12 @@ public class RegisterCommandValidator:AbstractValidator<RegisterCommandRequest>
     {
         RuleFor(r => r.FirstName)
             .NotEmpty().WithMessage("FirstName can not be Empty")
-            .NotNull().WithMessage("FirstName can not be null");
+            .NotNull().WithMessage("FirstName can not be null")
+            .MaximumLength(20).WithMessage("Maximum Lentgh must be 20");
         RuleFor(r => r.LastName)
             .NotEmpty().WithMessage("LastName can not be Empty")
-            .NotNull().WithMessage("LastName can not be null");    
+            .NotNull().WithMessage("LastName can not be null")
+            .MaximumLength(50).WithMessage("Maximum Lentgh must be 50");
         RuleFor(r => r.UserName)
             .NotEmpty().WithMessage("UserName can not be Empty")
             .NotNull().WithMessage("UserName can not be null");

@@ -11,6 +11,7 @@ public class UpdateSkillCommandValidator:AbstractValidator<UpdateSkillCommandReq
           .NotNull().WithMessage("Id can not be null");
         RuleFor(s => s.Name)
             .NotEmpty().WithMessage("Name can not be Empty")
-            .NotNull().WithMessage("Name can not be null");
+            .NotNull().WithMessage("Name can not be null")
+            .MaximumLength(20).WithMessage("Maximum Lentgh must be 20");
     }
 }

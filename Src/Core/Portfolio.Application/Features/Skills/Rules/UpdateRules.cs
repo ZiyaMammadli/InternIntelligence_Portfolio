@@ -1,27 +1,28 @@
 ﻿using Portfolio.Application.Bases;
-using Portfolio.Application.Exceptions.Auth;
 using Portfolio.Application.Exceptions.Skill;
 using Portfolio.Application.Interfaces.UnitOfWorks;
 using Portfolio.Domain.Entities;
 
 namespace Portfolio.Application.Features.Skills.Rules;
 
-public class CreateRules:BaseRule
+public class UpdateRules:BaseRule
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateRules(IUnitOfWork unitOfWork)
+    public UpdateRules(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
-    public Task EnsureUserIdCheckAsync(AppUser user)
+    public Task EnsureSkillFoundAsync(Skill skill)
     {
-        if (user is null) throw new UserNotFoundException(404, "UserId is invalid");
+        if (skill is null)
+            throw new SkillNotFoundException(404, "Skill is not found");
         return Task.CompletedTask;
     }
     public async Task EnsureSkillNameCheckAsync(string name)
     {
-        if (await _unitOfWork.GetReadRepository<Skill>().GetSingleAsync(s => s.Name == name) is not null)
+        var skill = await _unitOfWork.GetReadRepository<Skill>().GetSingleAsync(s => s.Name == name);
+        if (skill is not null && skill.Name != name)
             throw new SkillAlreadyExistException(400, "Skill is already exist");
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Features.Achievements.Commands.Create;
 using Portfolio.Application.Features.Achievements.Commands.Delete;
@@ -9,6 +10,7 @@ namespace Portfolio.Api.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class AchievementController : ControllerBase
     {
         private readonly IMediator mediator;

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Features.Skills.Commands.Create;
 using Portfolio.Application.Features.Skills.Commands.Delete;
@@ -9,6 +10,7 @@ namespace Portfolio.Api.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class SkillController : ControllerBase
     {
         private readonly IMediator _mediator;

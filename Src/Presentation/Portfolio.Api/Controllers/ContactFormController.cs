@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Features.ContactForms.Commands.SubmitForm;
 using Portfolio.Application.Features.ContactForms.Queries.GetAll;
@@ -7,6 +8,7 @@ namespace Portfolio.Api.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class ContactFormController : ControllerBase
     {
         private readonly IMediator _mediator;

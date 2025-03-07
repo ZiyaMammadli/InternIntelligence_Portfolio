@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Features.Skills.Commands.Create;
 using Portfolio.Application.Features.Skills.Commands.Delete;
 using Portfolio.Application.Features.Skills.Commands.Update;
+using Portfolio.Application.Features.Skills.Queries.GetAll;
 
 namespace Portfolio.Api.Controllers
 {
@@ -15,6 +16,13 @@ namespace Portfolio.Api.Controllers
         public SkillController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllSkill()
+        {
+            var response=await _mediator.Send(new GetAllSkillRequest());
+            return Ok(response);
         }
 
         [HttpPost]

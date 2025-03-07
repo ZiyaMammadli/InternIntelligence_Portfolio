@@ -16,17 +16,19 @@ namespace Portfolio.Api.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllContactForms()
+        {
+            var response = await _mediator.Send(new GetAllContactFormQueryRequest());
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> SubmitForm(SubmitFormCommandRequest request)
         {
             await _mediator.Send(request);
             return Ok();
         }
-        [HttpGet]
-        public async Task<IActionResult> GetAllContactForms()
-        {
-            var response=await _mediator.Send(new GetAllContactFormQueryRequest());
-            return Ok(response);
-        }
+        
     }
 }

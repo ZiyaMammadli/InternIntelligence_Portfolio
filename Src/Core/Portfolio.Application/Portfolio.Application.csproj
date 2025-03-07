@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Achievements\Queries\" />
     <Folder Include="Features\Auth\Queries\" />
     <Folder Include="Features\Projects\Queries\" />
     <Folder Include="Features\Skills\Queries\" />

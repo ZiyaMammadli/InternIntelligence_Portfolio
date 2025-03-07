@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Features.Achievements.Commands.Create;
 using Portfolio.Application.Features.Achievements.Commands.Delete;
 using Portfolio.Application.Features.Achievements.Commands.Update;
+using Portfolio.Application.Features.Achievements.Queries.GetAll;
 
 namespace Portfolio.Api.Controllers
 {
@@ -15,6 +16,13 @@ namespace Portfolio.Api.Controllers
         public AchievementController(IMediator mediator)
         {
             this.mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllAchievement()
+        {
+            var resonse = await mediator.Send(new GetAllAchievementRequest());
+            return Ok(resonse);
         }
         [HttpPost]
         public async Task<IActionResult> Create(CreateAchievementCommandRequest request)
@@ -34,5 +42,6 @@ namespace Portfolio.Api.Controllers
             await mediator.Send(request);
             return Ok();
         }
+        
     }
 }

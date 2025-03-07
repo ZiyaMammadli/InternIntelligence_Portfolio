@@ -19,7 +19,7 @@ namespace Portfolio.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllSkill()
+        public async Task<IActionResult> GetAllSkills()
         {
             var response=await _mediator.Send(new GetAllSkillRequest());
             return Ok(response);

@@ -19,7 +19,7 @@ namespace Portfolio.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAchievement()
+        public async Task<IActionResult> GetAllAchievements()
         {
             var resonse = await mediator.Send(new GetAllAchievementRequest());
             return Ok(resonse);

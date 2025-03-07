@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Portfolio.Application.Features.Projects.Commands.Create;
 using Portfolio.Application.Features.Projects.Commands.Delete;
 using Portfolio.Application.Features.Projects.Commands.Update;
+using Portfolio.Application.Features.Projects.Queries.GetAll;
 
 namespace Portfolio.Api.Controllers
 {
@@ -17,6 +18,14 @@ namespace Portfolio.Api.Controllers
         {
             _mediator = mediator;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllProjects()
+        {
+            var response=await _mediator.Send(new GetAllProjectRequest());
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateProjectCommandRequest request)
         {

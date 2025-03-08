@@ -13,6 +13,10 @@ This project is a Portfolio Management API developed using **ASP.NET Core Web AP
 - Rate Limiting to prevent brute-force attacks
 - HTTPS enforced in Production environment
 - Integration with frontend applications via CORS
+- Exception handling for error management
+- Implemented using **N-Tier Architecture**
+- Uses **MediatR** for CQRS pattern
+- **Unit of Work** pattern for better transaction management
 
 ## Technologies Used
 
@@ -22,6 +26,7 @@ This project is a Portfolio Management API developed using **ASP.NET Core Web AP
 - **FluentValidation**
 - **MediatR**
 - **Swagger (OpenAPI)**
+- **Unit of Work Pattern**
 - **Rate Limiting**
 
 ## Installation

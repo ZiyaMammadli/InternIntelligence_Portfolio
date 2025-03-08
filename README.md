@@ -85,7 +85,7 @@ dotnet run
 | Endpoint      | Method | Description             | Authentication |
 | ------------- | ------ | ----------------------- | -------------- |
 | /api/ContactForm/SubmitForm  | POST   | Submit Form             | ❌             |
-| /api/ContactForm/GetAllContactForms  | GET   | Get all Contact Forms             | ❌             |
+| /api/ContactForm/GetAllContactForms  | GET   | Get all Contact Forms             | ✅             |
 
 ✅ - Requires JWT Token ❌ - Public Access
 

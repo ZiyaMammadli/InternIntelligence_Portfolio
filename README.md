@@ -52,36 +52,40 @@ dotnet run
 ### Authentication
 | Endpoint        | Method | Description  | Authentication |
 | -------------- | ------ | ------------ | -------------- |
-| /api/auth/login | POST   | User Login   | ❌              |
+| /api/Auth/Register | POST   | User Register   | ❌              |
+| /api/Auth/Login | POST   | User Login   | ❌              |
+| /api/Auth/Revoke | POST   | User Revoke   | ❌              |
+| /api/Auth/RefreshToken | POST   | User RefreshToken   | ❌              |
 
 ### Projects
 | Endpoint           | Method | Description         | Authentication |
 | ------------------ | ------ | ------------------- | -------------- |
-| /api/projects      | GET    | Get all Projects    | ✅              |
-| /api/projects      | POST   | Create Project      | ✅              |
-| /api/projects/{id} | PUT    | Update Project      | ✅              |
-| /api/projects/{id} | DELETE | Delete Project      | ✅              |
+| /api/Project/GetAllProjects      | GET    | Get all Projects    | ✅              |
+| /api/Project/Create      | POST   | Create Project      | ✅              |
+| /api/Project/Update | PUT    | Update Project      | ✅              |
+| /api/Project/Delete | DELETE | Delete Project      | ✅              |
 
 ### Skills
 | Endpoint       | Method | Description      | Authentication |
 | -------------- | ------ | ---------------- | -------------- |
-| /api/skills    | GET    | Get all Skills   | ✅              |
-| /api/skills    | POST   | Create Skill     | ✅              |
-| /api/skills/{id} | PUT  | Update Skill     | ✅              |
-| /api/skills/{id} | DELETE | Delete Skill   | ✅              |
+| /api/Skill/GetAllSkills    | GET    | Get all Skills   | ✅              |
+| /api/Skill/Create    | POST   | Create Skill     | ✅              |
+| /api/Skill/Update | PUT  | Update Skill     | ✅              |
+| /api/Skill/Delete | DELETE | Delete Skill   | ✅              |
 
 ### Achievements
 | Endpoint           | Method | Description            | Authentication |
 | ------------------ | ------ | ---------------------- | -------------- |
-| /api/achievements  | GET    | Get all Achievements   | ✅              |
-| /api/achievements  | POST   | Create Achievement     | ✅              |
-| /api/achievements/{id} | PUT  | Update Achievement   | ✅              |
-| /api/achievements/{id} | DELETE | Delete Achievement | ✅              |
+| /api/Achievement/GetAllAchievements  | GET    | Get all Achievements   | ✅              |
+| /api/Achievement/Create  | POST   | Create Achievement     | ✅              |
+| /api/Achievement/Update | PUT  | Update Achievement   | ✅              |
+| /api/Achievement/Delete | DELETE | Delete Achievement | ✅              |
 
 ### Contact Form
 | Endpoint      | Method | Description             | Authentication |
 | ------------- | ------ | ----------------------- | -------------- |
-| /api/contact  | POST   | Submit Form             | ❌             |
+| /api/ContactForm/SubmitForm  | POST   | Submit Form             | ❌             |
+| /api/ContactForm/GetAllContactForms  | GET   | Get all Contact Forms             | ❌             |
 
 ✅ - Requires JWT Token ❌ - Public Access
 

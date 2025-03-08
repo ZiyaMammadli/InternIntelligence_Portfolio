@@ -3,6 +3,7 @@ using Portfolio.Persistence;
 using Portfolio.Application;
 using Portfolio.Application.ExceptionMiddleWares;
 using Microsoft.OpenApi.Models;
+using AspNetCoreRateLimit;
 var builder = WebApplication.CreateBuilder(args);
 
 var env = builder.Environment;
@@ -13,6 +14,24 @@ builder.Configuration
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddMemoryCache();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(options =>
+{
+    options.GeneralRules = new List<RateLimitRule>
+    {
+        new RateLimitRule
+        {
+            Endpoint = "*",
+            Limit = 5,
+            Period = "10s"
+        }
+    };
+});
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+builder.Services.AddInMemoryRateLimiting();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -65,6 +84,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseExceptionMiddleWare();
+
+app.UseIpRateLimiting();
 
 app.UseHttpsRedirection();
 

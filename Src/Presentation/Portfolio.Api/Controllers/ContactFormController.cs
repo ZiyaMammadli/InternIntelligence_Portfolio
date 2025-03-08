@@ -8,7 +8,6 @@ namespace Portfolio.Api.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
     public class ContactFormController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,6 +18,7 @@ namespace Portfolio.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllContactForms()
         {
             var response = await _mediator.Send(new GetAllContactFormQueryRequest());
